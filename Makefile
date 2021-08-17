@@ -21,7 +21,7 @@ argo-get-pass:
 	@echo "=========================="
 
 argo-port-forward: argo-get-pass
-	kubectl port-forward svc/argocd-server 8080:80
+	kubectl port-forward  -n argocd svc/argocd-server 8080:80
 
 helm:
 	helm repo add hashicorp https://helm.releases.hashicorp.com
@@ -58,5 +58,14 @@ configure-vault-kubernetes: isready
 		policies=argocd \
 		ttl=1h
 
+vault-add-kv:
+	export VAULT_ADDR=http://localhost:8200; \
+	CREDS_FILE=$$(find . -name 'vault-cluster-vault*.json'); \
+	vault login token=$$(jq -r '.root_token' "$$CREDS_FILE"); \
+	vault secrets enable -path=argocd kv || true
+
+test-secret: vault-add-kv
+	export VAULT_ADDR=http://localhost:8200; \
+	vault kv put argocd/my-secret my-value=supersecret
 
 deploy: kind argocd vault

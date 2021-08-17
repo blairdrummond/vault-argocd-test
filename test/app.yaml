@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/blairdrummond/vault-argocd-test.git
-    targetRevision: master
+    targetRevision: main
     path: test/manifest
   destination:
     server: https://kubernetes.default.svc
