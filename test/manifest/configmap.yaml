@@ -3,7 +3,5 @@ kind: ConfigMap
 metadata:
   name: example-configmap
   namespace: default
-  annotations:
-    avp.kubernetes.io/path: "argocd/my-secret"
 data:
-  secret: <my-value>
+  secret: <path:argocd/data/my-secret#my-value>
