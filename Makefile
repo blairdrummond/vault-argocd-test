@@ -65,7 +65,7 @@ configure-vault-kubernetes: isready
 	export VAULT_ADDR=http://localhost:8200; \
 	CREDS_FILE=$$(find . -name 'vault-cluster-vault*.json'); \
 	vault login token=$$(jq -r '.root_token' "$$CREDS_FILE"); \
-	vault secrets enable -path=argocd kv || true
+	vault secrets enable -version=2 -path=argocd kv || true
 
 	export VAULT_ADDR=http://localhost:8200; \
 	vault kv put argocd/my-secret my-value=supersecret
