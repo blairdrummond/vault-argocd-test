@@ -5,3 +5,5 @@ resources:
 - serviceaccount.yaml
 - cluster-role-binding.yaml
 - vault-plugin-secret.yaml
+- role.yaml
+- rolebinding.yaml
