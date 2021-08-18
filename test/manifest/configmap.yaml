@@ -4,4 +4,4 @@ metadata:
   name: example-configmap
   namespace: default
 data:
-  secret: <path:argocd#my-secret>
+  secret: <path:argocd/my-secret#my-value>
