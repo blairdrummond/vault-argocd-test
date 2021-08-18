@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: minio
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: minio
+    targetRevision: 7.1.1
+    helm:
+      values: |
+        ## MinIO(R) Gateway configuration
+        accessKey:
+          password: <path:argocd/minio#accessKey>
+        secretKey:
+          password: <path:argocd/minio#secretKey>
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
