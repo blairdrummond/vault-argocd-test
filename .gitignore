@@ -1,4 +1,3 @@
 vault-cluster*.json
 docs
-argocd-vault-plugin
 vault-values.yaml
